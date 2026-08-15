@@ -1,0 +1,38 @@
+[package]
+name = "mcpg-plugin-backend-mock"
+version = "0.1.0-alpha.15"
+license = "Apache-2.0"
+edition = "2024"
+description = """
+Mock backend binding plugin for mcpg — a developer/test fixture that
+returns a configured response without any external I/O. Supports a
+configured JSON `response` (wrapped as text + structured metadata), a
+`passthrough` mode that surfaces `response` as a literal CallToolResult
+(image/audio/embedded-resource/mixed content), a simulated `error`
+mode, and an optional `delay_ms`. Carries no transport machinery.
+Emits its result under the host's verbatim-result envelope convention
+so the operator controls `is_error` + content exactly.
+"""
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = []
+cdylib-export = []
+# Declared empty so the SDK macro's `register_static` accessor does not
+# trip `unexpected_cfgs`. mock is consumed as a cdylib.
+static-firstparty = []
+
+[dependencies]
+mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.13", version = "=0.1.0-beta.13" }
+mcpg-plugin-sdk      = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.13", version = "=0.1.0-beta.13", features = ["static-firstparty"] }
+mcpg-plugin-host     = { git = "https://github.com/mcpg-dev/mcpg-plugin-host", tag = "v0.1.0-beta.13", version = "=0.1.0-beta.13" }
+async-trait    = "0.1"
+serde          = { version = "1", features = ["derive"] }
+serde_json     = "1"
+tokio          = { version = "1", features = ["sync", "rt", "rt-multi-thread", "macros", "time"] }
+tracing        = "0.1"
+
+[dev-dependencies]
+tokio    = { version = "1", features = ["macros", "rt", "rt-multi-thread", "time"] }

@@ -1,0 +1,16 @@
+schema: mcpg.dev/plugin/v1
+id: dev.mcpg.backend.mock
+name: Mock Binding
+license: Apache-2.0
+description: |
+  Developer/test fixture backend. Returns an operator-configured
+  response with no external I/O: a JSON `response` wrapped as text +
+  structured metadata, a `passthrough` mode surfacing `response` as a
+  literal CallToolResult (image/audio/embedded-resource/mixed content),
+  a simulated `error` mode, and an optional `delay_ms`. The plugin emits
+  its result under the host verbatim-result envelope convention so the
+  operator controls `is_error` and content exactly.
+class: backend
+runtime: native-cdylib-v1
+protocol_version: "1.0"
+required_capabilities: []
