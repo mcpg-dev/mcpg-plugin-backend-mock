@@ -66,7 +66,7 @@ plugins:
     source:
       path: ./plugins/libmcpg_plugin_backend_mock.so
       # or, platform-agnostic:
-      # oci: ghcr.io/mcpg-dev/source-code/plugins/backend-mock:protocol-1
+      # oci: ghcr.io/mcpg-dev/plugins/backend-mock
 ```
 
 | Field | Type | Default | Description |
