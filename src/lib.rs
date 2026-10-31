@@ -150,6 +150,7 @@ impl BackendPlugin for MockBackendPlugin {
                 passthrough: parsed.passthrough,
             },
         );
+        tracing::info!(profile = %backend_name, "mock backend: registered profile");
         Ok(())
     }
 
